@@ -1,6 +1,6 @@
 # Lodge App
 
-Website for renting the family home in Blackfoot, Idaho for overnight stays, weddings and events.
+Website for The Lodge in Blackfoot, Idaho, available for overnight stays, weddings and events.
 
 ## What's here (v0 shell)
 

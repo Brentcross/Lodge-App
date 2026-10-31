@@ -9,7 +9,11 @@ export const metadata: Metadata = { title: "The Home" };
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
 export default function TheHome() {
-  const categories = [...new Set(property.photos.map((p) => p.category))];
+  const used = new Set(property.photos.map((p) => p.category));
+  const categories = [
+    ...property.photoCategories.filter((c) => used.has(c)),
+    ...[...used].filter((c) => !property.photoCategories.includes(c)),
+  ];
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 space-y-12">
       <header>
