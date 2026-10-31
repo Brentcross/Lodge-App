@@ -6,7 +6,10 @@ import Stats from "@/components/Stats";
 
 export const metadata: Metadata = { title: "The Home" };
 
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+
 export default function TheHome() {
+  const categories = [...new Set(property.photos.map((p) => p.category))];
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 space-y-12">
       <header>
@@ -18,10 +21,26 @@ export default function TheHome() {
 
       <Stats />
 
-      <section>
-        <h2 className="font-serif text-2xl mb-4">Photos</h2>
-        <Gallery photos={property.photos} />
-      </section>
+      {categories.length === 0 ? (
+        <section>
+          <h2 className="font-serif text-2xl mb-4">Photos</h2>
+          <Gallery photos={property.photos} />
+        </section>
+      ) : (
+        <section className="space-y-10">
+          <nav className="flex flex-wrap gap-2 text-sm">
+            {categories.map((c) => (
+              <a key={c} href={`#${slug(c)}`} className="rounded-full border border-line px-3 py-1 hover:bg-surface">{c}</a>
+            ))}
+          </nav>
+          {categories.map((c) => (
+            <div key={c} id={slug(c)} className="scroll-mt-20">
+              <h2 className="font-serif text-2xl mb-4">{c}</h2>
+              <Gallery photos={property.photos.filter((p) => p.category === c)} />
+            </div>
+          ))}
+        </section>
+      )}
 
       <section className="grid md:grid-cols-2 gap-6">
         {property.rooms.map((r) => (

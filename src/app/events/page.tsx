@@ -6,7 +6,7 @@ import Gallery from "@/components/Gallery";
 export const metadata: Metadata = { title: "Weddings & Events" };
 
 export default function Events() {
-  const eventPhotos = property.photos.filter((p) => /event|wedding|reception|ceremony/i.test(p.src + p.alt));
+  const eventPhotos = property.photos.filter((p) => p.event);
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 space-y-10">
       <header>
@@ -26,7 +26,7 @@ export default function Events() {
         )}
       </section>
 
-      <Gallery photos={eventPhotos} limit={3} />
+      <Gallery photos={eventPhotos} />
 
       <div className="text-center">
         <Link href="/reserve?type=event" className="inline-block rounded-full bg-accent text-accent-contrast px-6 py-3">

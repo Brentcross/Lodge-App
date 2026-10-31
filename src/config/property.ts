@@ -8,13 +8,17 @@ export type Photo = {
   /** Path under /public, e.g. "/images/gallery/front-exterior.jpg" */
   src: string;
   alt: string;
+  /** Section on The Home page (photos are grouped in the order categories first appear). */
+  category: string;
+  /** Also show on the Weddings & Events page. */
+  event?: boolean;
   caption?: string;
 };
 
 export const property = {
   // TODO: pick a real name for the property.
   name: "The Blackfoot Lodge",
-  tagline: "A spacious family home for gatherings, getaways and weddings.",
+  tagline: "A log lodge on private grounds in Blackfoot, Idaho, built for family gatherings, getaways and weddings.",
   city: "Blackfoot",
   state: "Idaho",
 
@@ -35,39 +39,50 @@ export const property = {
     eventCapacity: 0,
   },
 
+  // Drafted from the photos. Please review and correct.
   description: [
-    "Placeholder description. Tell guests what makes the house special: its size, the setting, the views, and what it feels like to stay here.",
-    "A second paragraph can cover the layout: the main gathering spaces, the kitchen, the bedrooms, and the outdoor areas.",
+    "A custom log home with a soaring great room, a two-story stone fireplace and walls of windows looking out over the grounds.",
+    "Inside there's a chef's kitchen with a stone island, a long dining table for big family meals, a loft lounge, a lower level with a home theater, game room and second kitchen, and bedrooms spread across the house for privacy.",
+    "Outside you'll find a deck with outdoor seating and a grill, a water-lily pond and stream, gardens and a large open lawn.",
   ],
 
   highlights: [
-    { title: "Room for everyone", body: "Placeholder: large common areas and many bedrooms for families and groups." },
-    { title: "Weddings & events", body: "Placeholder: the home and grounds have hosted weddings and receptions." },
-    { title: "Southeast Idaho", body: "Placeholder: close to Blackfoot, Idaho Falls and Pocatello." },
+    { title: "Room for everyone", body: "A great room, loft and lower level give big groups space to gather, and space to get away." },
+    { title: "Theater & game room", body: "Tiered theater recliners with a concession stand, plus pool and shuffleboard." },
+    { title: "Weddings & events", body: "Open lawn, a pond, gardens and a deck make a natural setting for ceremonies and receptions." },
   ],
 
   amenities: [
-    "Full kitchen",
+    "Chef's kitchen",
+    "Second kitchen (lower level)",
+    "Stone fireplace",
+    "Home theater",
+    "Pool table & shuffleboard",
+    "Loft lounge",
+    "Deck with outdoor seating",
+    "Gas grill",
+    "Pond & water feature",
+    "Large lawn",
+    "Washer & dryer",
     "Wi-Fi",
     "Free parking",
-    "Washer & dryer",
-    "Outdoor space",
-    "Event-ready grounds",
   ],
 
   rooms: [
-    { name: "Living areas", body: "Placeholder: describe the main living and gathering rooms." },
-    { name: "Kitchen & dining", body: "Placeholder: describe the kitchen and dining capacity." },
-    { name: "Bedrooms", body: "Placeholder: list bedrooms and bed types." },
-    { name: "Outdoors", body: "Placeholder: yard, patio, and space for ceremonies or receptions." },
+    { name: "Great room", body: "Two-story log walls, a floor-to-ceiling stone fireplace, leather seating and a dining table that seats a crowd." },
+    { name: "Kitchens", body: "A main kitchen with a stone island and stainless appliances, plus a second full kitchen on the lower level." },
+    { name: "Bedrooms & baths", body: "A primary suite with a four-poster bed and stone walk-in shower, plus additional bedrooms and baths. (Add bed counts here.)" },
+    { name: "Theater & game room", body: "Tiered recliners, a projector and a concession stand, plus pool, shuffleboard and lounge seating." },
+    { name: "Loft", body: "An upstairs lounge overlooking the great room, with sectional seating and a TV." },
+    { name: "Outdoors", body: "Deck, patio, water-lily pond and stream, gardens and a large lawn bordered by trees." },
   ],
 
   events: {
     intro:
-      "Placeholder: the home has hosted weddings and receptions. Describe the ceremony and reception spaces, capacity, and what's included.",
+      "The lodge has hosted weddings and receptions. The open lawn, pond and gardens make a beautiful ceremony setting, the great room and deck work for receptions, and the wedding party can stay the night.",
     offerings: [
-      "Ceremony space",
-      "Reception space",
+      "Lawn ceremony space",
+      "Reception in the great room or on the deck",
       "Getting-ready rooms",
       "Overnight stay for the wedding party",
     ],
@@ -87,7 +102,49 @@ export const property = {
    * Until real photos are added, the site shows styled placeholders.
    * Only use photos you own or have permission to use.
    */
-  photos: [] as Photo[],
+  photos: [
+    { src: "/images/gallery/exterior-front.jpg", category: "Exterior", alt: "Front of the lodge with covered porch", event: true },
+    { src: "/images/gallery/great-room-fireplace.jpg", category: "Great Room", alt: "Great room with two-story stone fireplace", event: true },
+    { src: "/images/gallery/kitchen-island.jpg", category: "Kitchen", alt: "Kitchen with stone island and bar seating" },
+    { src: "/images/gallery/primary-bedroom.jpg", category: "Bedrooms & Baths", alt: "Primary bedroom with four-poster bed" },
+    { src: "/images/gallery/pond.jpg", category: "Outdoors", alt: "Water-lily pond with stepping stones", event: true },
+    { src: "/images/gallery/lawn.jpg", category: "Outdoors", alt: "Large open lawn bordered by trees", event: true },
+    { src: "/images/gallery/exterior-flowers.jpg", category: "Exterior", alt: "Front of the lodge with flower beds" },
+    { src: "/images/gallery/exterior-side.jpg", category: "Exterior", alt: "Side view of the lodge" },
+    { src: "/images/gallery/aerial.jpg", category: "Exterior", alt: "Aerial view of the property" },
+    { src: "/images/gallery/great-room.jpg", category: "Great Room", alt: "Great room with log walls, dining and seating", event: true },
+    { src: "/images/gallery/great-room-overhead.jpg", category: "Great Room", alt: "Great room seen from the loft" },
+    { src: "/images/gallery/great-room-seating.jpg", category: "Great Room", alt: "Leather seating in the great room" },
+    { src: "/images/gallery/dining.jpg", category: "Great Room", alt: "Long dining table beneath the loft", event: true },
+    { src: "/images/gallery/great-room-loft.jpg", category: "Great Room", alt: "Great room and loft balcony" },
+    { src: "/images/gallery/staircase.jpg", category: "Great Room", alt: "Open log staircase to the loft" },
+    { src: "/images/gallery/entry.jpg", category: "Great Room", alt: "Front entry with double doors" },
+    { src: "/images/gallery/kitchen.jpg", category: "Kitchen", alt: "Kitchen with granite counters" },
+    { src: "/images/gallery/kitchen-2.jpg", category: "Kitchen", alt: "Kitchen island and stainless appliances" },
+    { src: "/images/gallery/laundry.jpg", category: "Kitchen", alt: "Laundry room" },
+    { src: "/images/gallery/primary-bedroom-2.jpg", category: "Bedrooms & Baths", alt: "Primary bedroom" },
+    { src: "/images/gallery/primary-bath.jpg", category: "Bedrooms & Baths", alt: "Primary bathroom with long vanity" },
+    { src: "/images/gallery/primary-shower.jpg", category: "Bedrooms & Baths", alt: "Stone walk-in shower" },
+    { src: "/images/gallery/bedroom-log-bed.jpg", category: "Bedrooms & Baths", alt: "Bedroom with log bed" },
+    { src: "/images/gallery/bedroom-patio.jpg", category: "Bedrooms & Baths", alt: "Bedroom with patio door" },
+    { src: "/images/gallery/bedroom-four-poster.jpg", category: "Bedrooms & Baths", alt: "Bedroom with four-poster bed" },
+    { src: "/images/gallery/powder-room.jpg", category: "Bedrooms & Baths", alt: "Bathroom with copper vessel sink" },
+    { src: "/images/gallery/bath-double-vanity.jpg", category: "Bedrooms & Baths", alt: "Bathroom with double vanity" },
+    { src: "/images/gallery/loft.jpg", category: "Loft", alt: "Loft lounge with sectional" },
+    { src: "/images/gallery/loft-tv.jpg", category: "Loft", alt: "Loft family room" },
+    { src: "/images/gallery/theater.jpg", category: "Theater & Game Room", alt: "Home theater with tiered recliners" },
+    { src: "/images/gallery/theater-2.jpg", category: "Theater & Game Room", alt: "Theater seating and screen" },
+    { src: "/images/gallery/concessions.jpg", category: "Theater & Game Room", alt: "Theater concession stand" },
+    { src: "/images/gallery/pool-table.jpg", category: "Theater & Game Room", alt: "Game room with pool table" },
+    { src: "/images/gallery/game-room.jpg", category: "Theater & Game Room", alt: "Game room with shuffleboard" },
+    { src: "/images/gallery/second-kitchen.jpg", category: "Theater & Game Room", alt: "Lower-level second kitchen" },
+    { src: "/images/gallery/second-kitchen-dining.jpg", category: "Theater & Game Room", alt: "Lower-level kitchen and dining" },
+    { src: "/images/gallery/deck.jpg", category: "Outdoors", alt: "Deck with outdoor seating and grill", event: true },
+    { src: "/images/gallery/water-feature.jpg", category: "Outdoors", alt: "Stream and rock water feature", event: true },
+    { src: "/images/gallery/patio.jpg", category: "Outdoors", alt: "Patio beside the rock garden" },
+    { src: "/images/gallery/garden.jpg", category: "Outdoors", alt: "Garden with sculpture" },
+    { src: "/images/gallery/garden-beds.jpg", category: "Outdoors", alt: "Raised garden beds" },
+  ] as Photo[],
 };
 
 export type Property = typeof property;

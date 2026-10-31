@@ -12,7 +12,7 @@ export default function Home() {
         className="relative bg-[#3b2a1d] text-white"
         style={hero ? { backgroundImage: `url(${asset(hero.src)})`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}
       >
-        <div className="bg-black/40">
+        <div className="bg-gradient-to-r from-black/75 via-black/45 to-black/10">
           <div className="mx-auto max-w-6xl px-4 py-28 sm:py-40">
             <p className="uppercase tracking-[0.2em] text-xs text-white/80">
               {property.city}, {property.state}

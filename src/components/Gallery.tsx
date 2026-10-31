@@ -27,8 +27,10 @@ export default function Gallery({ photos, limit }: { photos: Photo[]; limit?: nu
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
       {items.map((p) => (
-        <figure key={p.src} className="relative aspect-[4/3] overflow-hidden rounded-lg">
-          <Image src={asset(p.src)} alt={p.alt} fill sizes="(min-width: 768px) 33vw, 50vw" className="object-cover" />
+        <figure key={p.src} className="relative aspect-[4/3] overflow-hidden rounded-lg bg-line">
+          <a href={asset(p.src)} target="_blank" rel="noopener" title={p.alt}>
+            <Image src={asset(p.src)} alt={p.alt} fill sizes="(min-width: 768px) 33vw, 50vw" className="object-cover transition-transform duration-300 hover:scale-105" />
+          </a>
           {p.caption && (
             <figcaption className="absolute bottom-0 inset-x-0 bg-black/50 text-white text-xs px-2 py-1">
               {p.caption}
