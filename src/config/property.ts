@@ -118,6 +118,16 @@ export const property = {
     "Outdoors",
   ],
 
+  /**
+   * Spaces that exist but don't have photos yet. Each shows a "photo coming soon"
+   * tile in its section. Remove an entry once its real photo is added to `photos`.
+   */
+  comingSoon: [
+    { label: "Amphitheater", category: "Outdoors", event: true },
+    { label: "Sport court / dance floor", category: "Outdoors", event: true },
+    { label: "Playground", category: "Outdoors", event: false },
+  ],
+
   photos: [
     { src: "/images/gallery/exterior-front.jpg", category: "Exterior", alt: "Front of the lodge with covered porch", event: true },
     { src: "/images/gallery/great-room-fireplace.jpg", category: "Great Room", alt: "Great room with two-story stone fireplace", event: true },

@@ -26,7 +26,7 @@ export default function Events() {
         )}
       </section>
 
-      <Gallery photos={eventPhotos} />
+      <Gallery photos={eventPhotos} comingSoon={property.comingSoon.filter((x) => x.event).map((x) => x.label)} />
 
       <div className="text-center">
         <Link href="/reserve?type=event" className="inline-block rounded-full bg-accent text-accent-contrast px-6 py-3">

@@ -40,7 +40,10 @@ export default function TheHome() {
           {categories.map((c) => (
             <div key={c} id={slug(c)} className="scroll-mt-20">
               <h2 className="font-serif text-2xl mb-4">{c}</h2>
-              <Gallery photos={property.photos.filter((p) => p.category === c)} />
+              <Gallery
+                photos={property.photos.filter((p) => p.category === c)}
+                comingSoon={property.comingSoon.filter((x) => x.category === c).map((x) => x.label)}
+              />
             </div>
           ))}
         </section>

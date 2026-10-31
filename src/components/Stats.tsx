@@ -7,13 +7,13 @@ export default function Stats() {
     { label: "Bathrooms", value: s.bathrooms },
     { label: "Sleeps", value: s.sleeps },
     { label: "Event guests", value: s.eventCapacity },
-  ];
+  ].filter((i) => i.value); // hide anything not filled in yet
   return (
-    <dl className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+    <dl className={`grid grid-cols-2 gap-3 ${items.length === 3 ? "sm:grid-cols-3" : "sm:grid-cols-4"}`}>
       {items.map((i) => (
         <div key={i.label} className="rounded-lg bg-surface border border-line p-4 text-center">
           <dt className="text-xs uppercase tracking-wide text-muted">{i.label}</dt>
-          <dd className="font-serif text-2xl mt-1">{i.value || "—"}</dd>
+          <dd className="font-serif text-2xl mt-1">{i.value}</dd>
         </div>
       ))}
     </dl>

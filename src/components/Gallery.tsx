@@ -5,7 +5,16 @@ import { asset } from "@/lib/asset";
 const PLACEHOLDERS = ["Exterior", "Living room", "Kitchen", "Bedroom", "Grounds", "Event space"];
 
 /** Shows real photos when configured, otherwise labeled placeholders. */
-export default function Gallery({ photos, limit }: { photos: Photo[]; limit?: number }) {
+export default function Gallery({
+  photos,
+  limit,
+  comingSoon = [],
+}: {
+  photos: Photo[];
+  limit?: number;
+  /** Labels for spaces without photos yet, shown as placeholder tiles after the photos. */
+  comingSoon?: string[];
+}) {
   const items = limit ? photos.slice(0, limit) : photos;
 
   if (items.length === 0) {
@@ -37,6 +46,15 @@ export default function Gallery({ photos, limit }: { photos: Photo[]; limit?: nu
             </figcaption>
           )}
         </figure>
+      ))}
+      {comingSoon.map((label) => (
+        <div
+          key={label}
+          className="aspect-[4/3] rounded-lg border border-dashed border-line bg-gradient-to-br from-[#efe6da] to-[#e2d4c2] flex flex-col items-center justify-center text-center p-3"
+        >
+          <span className="font-serif text-lg">{label}</span>
+          <span className="text-xs text-muted mt-1">Photo coming soon</span>
+        </div>
       ))}
     </div>
   );
