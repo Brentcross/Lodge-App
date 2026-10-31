@@ -42,13 +42,16 @@ export default function TheHome() {
         </section>
       )}
 
-      <section className="grid md:grid-cols-2 gap-6">
+      <section>
+        <h2 className="font-serif text-2xl mb-4">Floor by floor</h2>
+        <div className="grid md:grid-cols-2 gap-6">
         {property.rooms.map((r) => (
           <div key={r.name} className="rounded-lg bg-surface border border-line p-6">
             <h3 className="font-serif text-xl">{r.name}</h3>
             <p className="text-muted mt-2">{r.body}</p>
           </div>
         ))}
+      </div>
       </section>
 
       <section>

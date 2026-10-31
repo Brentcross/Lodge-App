@@ -33,8 +33,8 @@ export const property = {
 
   // TODO: fill in real numbers.
   stats: {
-    bedrooms: 0,
-    bathrooms: 0,
+    bedrooms: 7, // 1 main floor (primary), 3 upstairs, 3 lower level
+    bathrooms: 4.5, // primary bath, 2 upstairs en-suite, 1.5 lower level. TODO: confirm main-floor half bath
     sleeps: 0,
     eventCapacity: 0,
   },
@@ -42,12 +42,12 @@ export const property = {
   // Drafted from the photos. Please review and correct.
   description: [
     "A custom log home with a soaring great room, a two-story stone fireplace and walls of windows looking out over the grounds.",
-    "Inside there's a chef's kitchen with a stone island, a long dining table for big family meals, a loft lounge, a lower level with a home theater, game room and second kitchen, and bedrooms spread across the house for privacy.",
+    "Seven bedrooms are spread over three floors. The main floor has the great room, the kitchen and the primary suite. Upstairs are three bedrooms, two with their own full bathrooms, and a smaller living room. The lower level has three more bedrooms, a full kitchen, a second great room, a home theater and a game room.",
     "Outside you'll find a deck with outdoor seating and a grill, a water-lily pond and stream, gardens and a large open lawn.",
   ],
 
   highlights: [
-    { title: "Room for everyone", body: "A great room, loft and lower level give big groups space to gather, and space to get away." },
+    { title: "Room for everyone", body: "Seven bedrooms and two great rooms give big groups space to gather, and space to get away." },
     { title: "Theater & game room", body: "Tiered theater recliners with a concession stand, plus pool and shuffleboard." },
     { title: "Weddings & events", body: "Open lawn, a pond, gardens and a deck make a natural setting for ceremonies and receptions." },
   ],
@@ -58,7 +58,8 @@ export const property = {
     "Stone fireplace",
     "Home theater",
     "Pool table & shuffleboard",
-    "Loft lounge",
+    "Upstairs living room",
+    "Second great room (lower level)",
     "Deck with outdoor seating",
     "Gas grill",
     "Pond & water feature",
@@ -69,11 +70,9 @@ export const property = {
   ],
 
   rooms: [
-    { name: "Great room", body: "Two-story log walls, a floor-to-ceiling stone fireplace, leather seating and a dining table that seats a crowd." },
-    { name: "Kitchens", body: "A main kitchen with a stone island and stainless appliances, plus a second full kitchen on the lower level." },
-    { name: "Bedrooms & baths", body: "A primary suite with a four-poster bed and stone walk-in shower, plus additional bedrooms and baths. (Add bed counts here.)" },
-    { name: "Theater & game room", body: "Tiered recliners, a projector and a concession stand, plus pool, shuffleboard and lounge seating." },
-    { name: "Loft", body: "An upstairs lounge overlooking the great room, with sectional seating and a TV." },
+    { name: "Main floor", body: "The great room with two-story log walls and a floor-to-ceiling stone fireplace, a long dining table, the chef's kitchen with a stone island, and the primary suite with a four-poster bed and stone walk-in shower." },
+    { name: "Upstairs", body: "Three bedrooms, two with their own full bathrooms, plus a smaller living room with sectional seating and a TV." },
+    { name: "Lower level", body: "Three bedrooms, 1.5 shared bathrooms, a full second kitchen, a second great room, a home theater with a concession stand, and a game room with pool and shuffleboard." },
     { name: "Outdoors", body: "Deck, patio, water-lily pond and stream, gardens and a large lawn bordered by trees." },
   ],
 
@@ -106,7 +105,7 @@ export const property = {
     { src: "/images/gallery/exterior-front.jpg", category: "Exterior", alt: "Front of the lodge with covered porch", event: true },
     { src: "/images/gallery/great-room-fireplace.jpg", category: "Great Room", alt: "Great room with two-story stone fireplace", event: true },
     { src: "/images/gallery/kitchen-island.jpg", category: "Kitchen", alt: "Kitchen with stone island and bar seating" },
-    { src: "/images/gallery/primary-bedroom.jpg", category: "Bedrooms & Baths", alt: "Primary bedroom with four-poster bed" },
+    { src: "/images/gallery/primary-bedroom.jpg", category: "Bedrooms & Baths", alt: "Main-floor primary suite with four-poster bed" },
     { src: "/images/gallery/pond.jpg", category: "Outdoors", alt: "Water-lily pond with stepping stones", event: true },
     { src: "/images/gallery/lawn.jpg", category: "Outdoors", alt: "Large open lawn bordered by trees", event: true },
     { src: "/images/gallery/exterior-flowers.jpg", category: "Exterior", alt: "Front of the lodge with flower beds" },
@@ -123,21 +122,21 @@ export const property = {
     { src: "/images/gallery/kitchen-2.jpg", category: "Kitchen", alt: "Kitchen island and stainless appliances" },
     { src: "/images/gallery/laundry.jpg", category: "Kitchen", alt: "Laundry room" },
     { src: "/images/gallery/primary-bedroom-2.jpg", category: "Bedrooms & Baths", alt: "Primary bedroom" },
-    { src: "/images/gallery/primary-bath.jpg", category: "Bedrooms & Baths", alt: "Primary bathroom with long vanity" },
-    { src: "/images/gallery/primary-shower.jpg", category: "Bedrooms & Baths", alt: "Stone walk-in shower" },
+    { src: "/images/gallery/primary-bath.jpg", category: "Bedrooms & Baths", alt: "Primary suite bathroom" },
+    { src: "/images/gallery/primary-shower.jpg", category: "Bedrooms & Baths", alt: "Primary suite stone walk-in shower" },
     { src: "/images/gallery/bedroom-log-bed.jpg", category: "Bedrooms & Baths", alt: "Bedroom with log bed" },
     { src: "/images/gallery/bedroom-patio.jpg", category: "Bedrooms & Baths", alt: "Bedroom with patio door" },
     { src: "/images/gallery/bedroom-four-poster.jpg", category: "Bedrooms & Baths", alt: "Bedroom with four-poster bed" },
     { src: "/images/gallery/powder-room.jpg", category: "Bedrooms & Baths", alt: "Bathroom with copper vessel sink" },
     { src: "/images/gallery/bath-double-vanity.jpg", category: "Bedrooms & Baths", alt: "Bathroom with double vanity" },
-    { src: "/images/gallery/loft.jpg", category: "Loft", alt: "Loft lounge with sectional" },
-    { src: "/images/gallery/loft-tv.jpg", category: "Loft", alt: "Loft family room" },
+    { src: "/images/gallery/loft.jpg", category: "Upstairs Living Room", alt: "Upstairs living room with sectional" },
+    { src: "/images/gallery/loft-tv.jpg", category: "Upstairs Living Room", alt: "Upstairs living room with TV" },
     { src: "/images/gallery/theater.jpg", category: "Theater & Game Room", alt: "Home theater with tiered recliners" },
     { src: "/images/gallery/theater-2.jpg", category: "Theater & Game Room", alt: "Theater seating and screen" },
     { src: "/images/gallery/concessions.jpg", category: "Theater & Game Room", alt: "Theater concession stand" },
     { src: "/images/gallery/pool-table.jpg", category: "Theater & Game Room", alt: "Game room with pool table" },
     { src: "/images/gallery/game-room.jpg", category: "Theater & Game Room", alt: "Game room with shuffleboard" },
-    { src: "/images/gallery/second-kitchen.jpg", category: "Theater & Game Room", alt: "Lower-level second kitchen" },
+    { src: "/images/gallery/second-kitchen.jpg", category: "Theater & Game Room", alt: "Lower-level full kitchen" },
     { src: "/images/gallery/second-kitchen-dining.jpg", category: "Theater & Game Room", alt: "Lower-level kitchen and dining" },
     { src: "/images/gallery/deck.jpg", category: "Outdoors", alt: "Deck with outdoor seating and grill", event: true },
     { src: "/images/gallery/water-feature.jpg", category: "Outdoors", alt: "Stream and rock water feature", event: true },
