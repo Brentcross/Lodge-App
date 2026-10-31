@@ -2,6 +2,7 @@ import Link from "next/link";
 import { property } from "@/config/property";
 import Gallery from "@/components/Gallery";
 import Stats from "@/components/Stats";
+import { asset } from "@/lib/asset";
 
 export default function Home() {
   const hero = property.photos[0];
@@ -9,7 +10,7 @@ export default function Home() {
     <>
       <section
         className="relative bg-[#3b2a1d] text-white"
-        style={hero ? { backgroundImage: `url(${hero.src})`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}
+        style={hero ? { backgroundImage: `url(${asset(hero.src)})`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}
       >
         <div className="bg-black/40">
           <div className="mx-auto max-w-6xl px-4 py-28 sm:py-40">

@@ -19,14 +19,12 @@ export const property = {
   state: "Idaho",
 
   /**
-   * The full street address is kept here for confirmation emails and the
-   * booking confirmation, but is NOT shown on public pages by default.
-   * Many short-term rental hosts only reveal the exact address after booking.
+   * The exact street address is intentionally NOT stored in this public repo.
+   * Share it with guests once a booking is confirmed.
    */
-  privateAddress: "104 S 670 W, Blackfoot, ID 83221",
-  showFullAddressPublicly: false,
 
-  contactEmail: "hello@example.com", // TODO
+  /** Reservation requests from the website are emailed here. */
+  contactEmail: "hello@example.com", // TODO: set the real address
   contactPhone: "", // TODO (optional)
 
   // TODO: fill in real numbers.

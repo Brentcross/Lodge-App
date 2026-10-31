@@ -7,13 +7,16 @@ Website for renting the family home in Blackfoot, Idaho for overnight stays, wed
 - **Home** (`/`): hero, key stats, highlights, photo preview, events call-to-action
 - **The Home** (`/the-home`): description, full gallery, rooms, amenities
 - **Weddings & Events** (`/events`): event offerings plus an inquiry link
-- **Reserve** (`/reserve`): reservation request form (stay or event) with validation
-- **API**: `POST /api/reservations` (create request), `GET /api/availability` (blocked dates)
+- **Reserve** (`/reserve`): reservation request form (stay or event) with validation.
+  On submit it opens the guest's email app with the request pre-filled, addressed
+  to `contactEmail` in the config.
 
 All property content (name, text, stats, amenities, photos, pricing) lives in
 `src/config/property.ts`.
 
-Reservations are kept **in memory** for now and reset on restart. No payments yet.
+The site is static and is published to **GitHub Pages** automatically on every push
+(`.github/workflows/pages.yml`). There's no backend yet, so no stored bookings and no payments.
+The property's street address is intentionally not kept in this public repo.
 
 ## Run locally
 

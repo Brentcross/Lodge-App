@@ -2,9 +2,7 @@ import Link from "next/link";
 import { property } from "@/config/property";
 
 export default function Footer() {
-  const location = property.showFullAddressPublicly
-    ? property.privateAddress
-    : `${property.city}, ${property.state}`;
+  const location = `${property.city}, ${property.state}`;
   return (
     <footer className="border-t border-line mt-16">
       <div className="mx-auto max-w-6xl px-4 py-8 text-sm text-muted flex flex-col sm:flex-row gap-4 justify-between">

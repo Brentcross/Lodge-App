@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { property } from "@/config/property";
+import { reservationMailto, validateReservation } from "@/lib/reservations";
 
 type Errors = Record<string, string>;
 
@@ -15,31 +17,32 @@ export default function ReserveForm({ minimumNights }: { minimumNights: number }
   const [done, setDone] = useState(false);
   const today = new Date().toISOString().slice(0, 10);
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitting(true);
-    setErrors({});
-    const data = Object.fromEntries(new FormData(e.currentTarget));
-    try {
-      const res = await fetch("/api/reservations", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, type }),
-      });
-      if (res.ok) setDone(true);
-      else setErrors((await res.json()).errors ?? { form: "Something went wrong." });
-    } catch {
-      setErrors({ form: "Couldn't reach the server. Please try again." });
-    } finally {
+    const data = { ...Object.fromEntries(new FormData(e.currentTarget)), type };
+    const result = validateReservation(data, { today, minimumNights });
+    if (!result.ok) {
+      setErrors(result.errors);
       setSubmitting(false);
+      return;
     }
+    setErrors({});
+    // No backend yet: open the guest's email app with the request pre-filled.
+    window.location.href = reservationMailto(property.contactEmail, result.value);
+    setDone(true);
+    setSubmitting(false);
   }
 
   if (done) {
     return (
       <div className="mt-8 rounded-lg border border-line bg-surface p-8 text-center">
-        <h2 className="font-serif text-2xl">Request received</h2>
-        <p className="text-muted mt-2">Thanks! We&apos;ll be in touch soon to confirm your dates.</p>
+        <h2 className="font-serif text-2xl">Almost done</h2>
+        <p className="text-muted mt-2">
+          Your email app should have opened with your request filled in. Press send and we&apos;ll be in
+          touch to confirm your dates. If nothing opened, email us at{" "}
+          <a className="text-accent underline" href={`mailto:${property.contactEmail}`}>{property.contactEmail}</a>.
+        </p>
       </div>
     );
   }
@@ -110,7 +113,7 @@ export default function ReserveForm({ minimumNights }: { minimumNights: number }
         disabled={submitting}
         className="rounded-full bg-accent text-accent-contrast px-6 py-3 font-medium disabled:opacity-60"
       >
-        {submitting ? "Sending…" : "Send request"}
+        {submitting ? "Opening email…" : "Send request"}
       </button>
     </form>
   );

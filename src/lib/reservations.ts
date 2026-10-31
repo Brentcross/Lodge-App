@@ -1,17 +1,14 @@
 /**
- * Reservation requests.
+ * Reservation request validation.
  *
- * This is a deliberately simple in-memory store so the booking flow works end
- * to end today. It resets whenever the server restarts. Swap the functions
- * below for a real database (e.g. Postgres via Supabase/Neon) and add payments
- * (e.g. Stripe Checkout) when ready. Callers shouldn't need to change.
+ * The site is currently static (GitHub Pages), so requests are emailed to the
+ * host rather than stored. When a backend is added (database + payments),
+ * reuse this validation on the server too.
  */
 
 export type StayType = "stay" | "event";
 
 export type ReservationRequest = {
-  id: string;
-  createdAt: string;
   type: StayType;
   checkIn: string; // YYYY-MM-DD
   checkOut: string; // YYYY-MM-DD
@@ -20,38 +17,7 @@ export type ReservationRequest = {
   email: string;
   phone?: string;
   message?: string;
-  status: "pending" | "confirmed" | "declined";
 };
-
-export type NewReservation = Omit<ReservationRequest, "id" | "createdAt" | "status">;
-
-const store: ReservationRequest[] = [];
-
-export function listReservations(): ReservationRequest[] {
-  return [...store];
-}
-
-/** Date ranges that are already confirmed and can't be booked. */
-export function blockedRanges(): { checkIn: string; checkOut: string }[] {
-  return store
-    .filter((r) => r.status === "confirmed")
-    .map(({ checkIn, checkOut }) => ({ checkIn, checkOut }));
-}
-
-export function overlapsBlocked(checkIn: string, checkOut: string): boolean {
-  return blockedRanges().some((b) => checkIn < b.checkOut && b.checkIn < checkOut);
-}
-
-export function createReservation(input: NewReservation): ReservationRequest {
-  const r: ReservationRequest = {
-    ...input,
-    id: crypto.randomUUID(),
-    createdAt: new Date().toISOString(),
-    status: "pending",
-  };
-  store.push(r);
-  return r;
-}
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -59,7 +25,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export function validateReservation(
   body: unknown,
   opts: { today: string; minimumNights: number },
-): { ok: true; value: NewReservation } | { ok: false; errors: Record<string, string> } {
+): { ok: true; value: ReservationRequest } | { ok: false; errors: Record<string, string> } {
   const b = (body ?? {}) as Record<string, unknown>;
   const errors: Record<string, string> = {};
   const str = (k: string) => (typeof b[k] === "string" ? (b[k] as string).trim() : "");
@@ -91,14 +57,26 @@ export function validateReservation(
   return {
     ok: true,
     value: {
-      type,
-      checkIn,
-      checkOut,
-      guests,
-      name,
-      email,
+      type, checkIn, checkOut, guests, name, email,
       phone: str("phone") || undefined,
       message: str("message").slice(0, 2000) || undefined,
     },
   };
+}
+
+/** Build a mailto: link that opens the guest's email app with the request filled in. */
+export function reservationMailto(to: string, r: ReservationRequest): string {
+  const kind = r.type === "stay" ? "Stay" : "Event";
+  const subject = `${kind} request: ${r.checkIn} to ${r.checkOut} (${r.name})`;
+  const body = [
+    `Type: ${r.type === "stay" ? "Overnight stay" : "Wedding / event"}`,
+    `Dates: ${r.checkIn} to ${r.checkOut}`,
+    `Guests: ${r.guests}`,
+    `Name: ${r.name}`,
+    `Email: ${r.email}`,
+    r.phone ? `Phone: ${r.phone}` : "",
+    "",
+    r.message ?? "",
+  ].filter((l, i, a) => l !== "" || i === a.length - 2).join("\n");
+  return `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
